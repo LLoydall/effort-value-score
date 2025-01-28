@@ -5,6 +5,8 @@ const indexRouter = require('./routes/index');
 const app = express();
 const PORT = 3000;
 
+app.use(express.json());
+
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
 
