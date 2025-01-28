@@ -6,7 +6,6 @@ const path = require('path');
 // Each idea will look like:
 // {
 //   id: number,
-//   title: string,
 //   description: string,
 //   scores: [
 //     { userId: string, effort: number, value: number },
@@ -16,7 +15,6 @@ const path = require('path');
 let ideas = [
   {
     id: 1,
-    title: 'Automate Build Process',
     description: 'Use CI/CD to streamline builds',
     scores: [
       { userId: 'alice', effort: 3, value: 7 },
@@ -25,7 +23,6 @@ let ideas = [
   },
   {
     id: 2,
-    title: 'Add Chatbot Feature',
     description: 'Implement a chatbot for customer queries',
     scores: [
       { userId: 'alice', effort: 6, value: 9 },
@@ -88,15 +85,14 @@ router.get('/ideas/:id', (req, res) => {
 // CREATE a new idea
 // ---------------------------------------------------------------------------
 router.post('/ideas', (req, res) => {
-  const { title, description } = req.body;
+  const { description } = req.body;
 
-  if (!title) {
-    return res.status(400).json({ error: 'Missing "title" field' });
+  if (!description) {
+    return res.status(400).json({ error: 'Missing "Description" field' });
   }
 
   const newIdea = {
     id: ideas.length > 0 ? ideas[ideas.length - 1].id + 1 : 1,
-    title,
     description: description || '',
     scores: []
   };
@@ -110,16 +106,13 @@ router.post('/ideas', (req, res) => {
 // ---------------------------------------------------------------------------
 router.put('/ideas/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
-  const { title, description } = req.body;
+  const { description } = req.body;
   const ideaIndex = ideas.findIndex((i) => i.id === id);
 
   if (ideaIndex === -1) {
     return res.status(404).json({ error: 'Idea not found' });
   }
 
-  if (typeof title !== 'undefined') {
-    ideas[ideaIndex].title = title;
-  }
   if (typeof description !== 'undefined') {
     ideas[ideaIndex].description = description;
   }
@@ -182,19 +175,18 @@ router.post('/ideas/:id/scores', (req, res) => {
 router.get('/export', (req, res) => {
   try {
     // Flatten data for CSV
-    // We'll export columns: id, title, description, avgEffort, avgValue
+    // We'll export columns: id, description, avgEffort, avgValue
     const flattened = ideas.map((idea) => {
       const { avgEffort, avgValue } = calculateAverages(idea.scores);
       return {
         id: idea.id,
-        title: idea.title,
         description: idea.description,
         avgEffort,
         avgValue
       };
     });
 
-    const fields = ['id', 'title', 'description', 'avgEffort', 'avgValue'];
+    const fields = ['id', 'description', 'avgEffort', 'avgValue'];
     const parser = new Parser({ fields });
     const csv = parser.parse(flattened);
 
