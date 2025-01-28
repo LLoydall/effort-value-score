@@ -6,7 +6,8 @@
   "author": "alphasec",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "json2csv": "^6.0.0-alpha.2"
   },
   "scripts": {
     "start": "node app.js"
