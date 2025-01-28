@@ -99,7 +99,7 @@ function createIdeaRow(idea) {
   // If isOwner, show an editable input for description
   // else show read-only text
   const descriptionCell = isOwner
-    ? `<input type="text" class="form-control" value="${description}">`
+    ? `<input id="description-in" type="text" class="form-control" value="${description}">`
     : `<span>${description}</span>`;
 
   // Actions column: Score always visible, Update/Delete only if owner
@@ -110,37 +110,37 @@ function createIdeaRow(idea) {
     <td>${avgEffort}</td>
     <td>${avgValue}</td>
     <td>${score}</td>
-    <td><input type="number" class="form-control" placeholder="Effort"></td>
-    <td><input type="number" class="form-control" placeholder="Value"></td>
+    <td><input id="effort-in" type="number" class="form-control" placeholder="Effort"></td>
+    <td><input id="value-in" type="number" class="form-control" placeholder="Value"></td>
     <td>
       <!-- Score always available -->
-      <button class="btn btn-success btn-sm mb-1">Score</button>
+      <button id="score-btn" class="btn btn-success btn-sm mb-1">Score</button>
       <!-- Update/Delete hidden if !isOwner -->
       ${
         isOwner
-          ? `<button class="btn btn-warning btn-sm mb-1">Update</button>
-             <button class="btn btn-danger btn-sm">Delete</button>`
+          ? `<button id="update-btn" class="btn btn-warning btn-sm mb-1">Update</button>
+             <button id="delete-btn" class="btn btn-danger btn-sm">Delete</button>`
           : ''
       }
     </td>
   `;
 
   // Grab references
-  const effortInput = row.cells[4].querySelector('input');
-  const valueInput = row.cells[5].querySelector('input');
-  const scoreBtn = row.cells[6].querySelectorAll('button')[0];
+  const effortInput = row.querySelector('#effort-in'); 
+  const valueInput = row.querySelector('#value-in');
+  const scoreBtn = row.querySelector('#score-btn');
 
   // If isOwner, we have updateBtn & deleteBtn
   let updateBtn, deleteBtn;
   if (isOwner) {
-    updateBtn = row.cells[6].querySelectorAll('button')[1];
-    deleteBtn = row.cells[6].querySelectorAll('button')[2];
+    updateBtn = row.querySelector('#update-btn');
+    deleteBtn = row.querySelector('#delete-btn');
   }
 
   // If isOwner, we have an input for description
   let descriptionInput;
   if (isOwner) {
-    descriptionInput = row.cells[1].querySelector('input');
+    descriptionInput = row.querySelector('#description-in');
   }
 
   // 1) Score button
