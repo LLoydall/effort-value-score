@@ -13,7 +13,6 @@ body {
 
 .row {
   display: table-row;
-  height: 75%;
   background-color: #282828;
   text-align: center;
 }
