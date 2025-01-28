@@ -25,3 +25,11 @@ body {
   -webkit-text-fill-color: transparent;
   padding-top: 100px;
 }
+
+.intro-text {
+  color: #caa;
+  font-size: 24px;
+  font-family: ui-serif;
+  font-style: italic;
+  padding-top: 20px;
+}

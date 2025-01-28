@@ -42,7 +42,6 @@ function renderTable(ideas) {
       avgValue: idea.avgValue || 0,
       score: (idea.avgValue === 0) ? 0 : parseFloat((idea.avgEffort / idea.avgValue).toFixed(2))
     }))
-    .sort((a, b) => b.score - a.score)
     .forEach((idea) => {
       ideasTableBody.appendChild(createIdeaRow(idea));
     });
@@ -55,11 +54,7 @@ function createNewIdeaRow() {
   const row = document.createElement('tr');
   row.innerHTML = `
     <td></td> <!-- ID blank -->
-    <td><input type="text" class="form-control" placeholder="Description"></td>
-    <td></td> <!-- Avg Eff blank -->
-    <td></td> <!-- Avg Val blank -->
-    <td></td> <!-- Score Effort blank -->
-    <td></td> <!-- Score Value blank -->
+    <td><textarea type="text" class="form-control" placeholder="Description" colspan="6" /></td>
     <td>
       <button class="btn btn-primary btn-sm">Add Idea</button>
     </td>
