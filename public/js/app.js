@@ -54,7 +54,7 @@ function createNewIdeaRow() {
   const row = document.createElement('tr');
   row.innerHTML = `
     <td></td> <!-- ID blank -->
-    <td colspan="6"><textarea type="text" class="form-control" placeholder="Description"></textarea></td>
+    <td colspan="6"><textarea id="description" type="text" class="form-control" placeholder="Description"></textarea></td>
     <td>
       <button class="btn btn-primary btn-sm">Add Idea</button>
     </td>
@@ -62,7 +62,7 @@ function createNewIdeaRow() {
 
   const addButton = row.querySelector('button');
   addButton.addEventListener('click', async () => {
-    const descInput = row.cells[1].querySelector('input');
+    const descInput = row.cells[1].querySelector('#description');
     const description = descInput.value.trim();
 
     if (!description) {
