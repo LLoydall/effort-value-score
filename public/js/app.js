@@ -93,4 +93,19 @@ async function submitScore(event) {
 
 // ----------------------------------------------
 // Download CSV
-// ------------
+// ----------------------------------------------
+function downloadCsv() {
+  // Simply navigate to /export which triggers CSV download
+  window.location.href = '/export';
+}
+
+// ----------------------------------------------
+// Attach event listeners
+// ----------------------------------------------
+refreshIdeasBtn.addEventListener('click', fetchIdeas);
+exportCsvBtn.addEventListener('click', downloadCsv);
+newIdeaForm.addEventListener('submit', addNewIdea);
+newScoreForm.addEventListener('submit', submitScore);
+
+// Fetch ideas immediately on page load
+document.addEventListener('DOMContentLoaded', fetchIdeas);
