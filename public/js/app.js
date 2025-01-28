@@ -35,9 +35,17 @@ function renderTable(ideas) {
   }
 
   // Create a row for each idea
-  ideas.forEach((idea) => {
-    ideasTableBody.appendChild(createIdeaRow(idea));
-  });
+  ideas
+    .map((idea) => ({
+      ...idea,
+      avgEffort: idea.avgEffort || 0,
+      avgValue: idea.avgValue || 0,
+      score: (idea.avgValue === 0) ? 0 : parseFloat((idea.avgEffort / idea.avgValue).toFixed(2));
+    }))
+    .sort((a, b) => b.score - a.score)
+    .forEach((idea) => {
+      ideasTableBody.appendChild(createIdeaRow(idea));
+    });
 }
 
 // ----------------------------------------------
@@ -84,7 +92,7 @@ function createNewIdeaRow() {
 // Create a row for an existing idea
 // ----------------------------------------------
 function createIdeaRow(idea) {
-  const { id, description, avgEffort, avgValue } = idea;
+  const { id, description, avgEffort, avgValue, score } = idea;
 
   const row = document.createElement('tr');
 
@@ -101,6 +109,7 @@ function createIdeaRow(idea) {
     <td>${descriptionCell}</td>
     <td>${avgEffort}</td>
     <td>${avgValue}</td>
+    <td>${score}</td>
     <td><input type="number" class="form-control" placeholder="Effort"></td>
     <td><input type="number" class="form-control" placeholder="Value"></td>
     <td>

@@ -121,7 +121,6 @@ router.delete('/ideas/:id', (req, res) => {
 
 // POST a user's score for an idea => create or update
 router.post('/ideas/:id/scores', (req, res) => {
-  // If req.body is undefined, ensure app.use(express.json()) is in app.js
   const id = parseInt(req.params.id, 10);
   const { userId, effort, value } = req.body;
 
@@ -149,20 +148,25 @@ router.post('/ideas/:id/scores', (req, res) => {
   res.json(ideas[ideaIndex]);
 });
 
-// EXPORT CSV (ideas + average scores)
+// EXPORT CSV (ideas + average scores + 'score' = avgEffort / avgValue)
 router.get('/export', (req, res) => {
   try {
     const flattened = ideas.map((idea) => {
       const { avgEffort, avgValue } = calculateAverages(idea.scores);
+      // Avoid division by zero
+      const score = (avgValue === 0) ? 0 : parseFloat((avgEffort / avgValue).toFixed(2));
+
       return {
         id: idea.id,
         description: idea.description,
         avgEffort,
-        avgValue
+        avgValue,
+        score
       };
     });
 
-    const fields = ['id', 'description', 'avgEffort', 'avgValue'];
+    // Now 'score' is included as a column
+    const fields = ['id', 'description', 'avgEffort', 'avgValue', 'score'];
     const parser = new Parser({ fields });
     const csv = parser.parse(flattened);
 
