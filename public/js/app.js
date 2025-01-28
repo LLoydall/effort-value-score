@@ -40,7 +40,7 @@ function renderTable(ideas) {
       ...idea,
       avgEffort: idea.avgEffort || 0,
       avgValue: idea.avgValue || 0,
-      score: (idea.avgValue === 0) ? 0 : parseFloat((idea.avgEffort / idea.avgValue).toFixed(2));
+      score: (idea.avgValue === 0) ? 0 : parseFloat((idea.avgEffort / idea.avgValue).toFixed(2))
     }))
     .sort((a, b) => b.score - a.score)
     .forEach((idea) => {
