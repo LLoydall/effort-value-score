@@ -54,7 +54,7 @@ function createNewIdeaRow() {
   const row = document.createElement('tr');
   row.innerHTML = `
     <td></td> <!-- ID blank -->
-    <td><textarea type="text" class="form-control" placeholder="Description" colspan="6" /></td>
+    <td colspan="6"><textarea type="text" class="form-control" placeholder="Description"></textarea></td>
     <td>
       <button class="btn btn-primary btn-sm">Add Idea</button>
     </td>
