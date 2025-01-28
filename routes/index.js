@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { Parser } = require('json2csv');
-
+const path = require('path');
 // In-memory data structure
 // Each idea will look like:
 // {
@@ -204,6 +204,11 @@ router.get('/export', (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Failed to export CSV' });
   }
+});
+
+// Serve the index.html file for the root route
+router.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/index.html'));
 });
 
 module.exports = router;
