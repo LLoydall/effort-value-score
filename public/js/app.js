@@ -1,6 +1,4 @@
 // DOM references
-import axios from 'axios';
-
 const refreshIdeasBtn = document.getElementById('refreshIdeasBtn');
 const exportCsvBtn = document.getElementById('exportCsvBtn');
 const ideasTableBody = document.querySelector('#ideasTable tbody');
