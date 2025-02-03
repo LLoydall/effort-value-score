@@ -38,9 +38,8 @@ function renderTable(ideas) {
   ideas
     .map((idea) => ({
       ...idea,
-      avgEffort: idea.avgEffort || 0,
-      avgValue: idea.avgValue || 0,
-      score: (idea.avgValue === 0) ? 0 : parseFloat((idea.avgEffort / idea.avgValue).toFixed(2))
+      avgEffort: idea.avgEffort ?? 0,
+      avgValue: idea.avgValue ?? 0,
     }))
     .forEach((idea) => {
       ideasTableBody.appendChild(createIdeaRow(idea));

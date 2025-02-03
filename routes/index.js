@@ -54,7 +54,9 @@ function calculateAverages(scores) {
 router.get('/ideas', (req, res) => {
   const dataWithAverages = ideas.map((idea) => {
     const { avgEffort, avgValue } = calculateAverages(idea.scores);
-    return { ...idea, avgEffort, avgValue };
+    let score = (avgValue === 0) ? 0 : parseFloat((avgEffort / avgValue).toFixed(2));
+    score = (isNaN(score) || Infinity === score) ? 10 : score;
+    return { ...idea, avgEffort, avgValue, score };
   });
   res.json(dataWithAverages);
 });
