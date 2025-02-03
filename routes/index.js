@@ -154,7 +154,8 @@ router.get('/export', (req, res) => {
     const flattened = ideas.map((idea) => {
       const { avgEffort, avgValue } = calculateAverages(idea.scores);
       // Avoid division by zero
-      const score = (avgValue === 0) ? 0 : parseFloat((avgEffort / avgValue).toFixed(2));
+      let score = (avgValue === 0) ? 0 : parseFloat((avgEffort / avgValue).toFixed(2));
+      score = (isNaN(score) || Infinity === score) ? 10 : score;
 
       return {
         id: idea.id,
