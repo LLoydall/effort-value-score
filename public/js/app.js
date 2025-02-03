@@ -175,8 +175,8 @@ function createIdeaRow(idea) {
       alert('Please enter your User ID at the top before scoring.');
       return;
     }
-    const effVal = parseInt(effortInput.value.trim(), 10) ?? 0;
-    const valVal = parseInt(valueInput.value.trim(), 10) ?? 0;
+    const effVal = parseInt(effortInput.value.trim() || 0, 10);
+    const valVal = parseInt(valueInput.value.trim() || 0, 10);
     if (isNaN(effVal) || isNaN(valVal)) {
       alert('Effort and Value must be valid numbers.');
       return;
