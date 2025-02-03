@@ -45,8 +45,8 @@ function calculateAverages(scores) {
   const totalEffort = scores.reduce((sum, s) => sum + s.effort, 0);
   const totalValue = scores.reduce((sum, s) => sum + s.value, 0);
   return {
-    avgEffort: +(totalEffort / scores.length).toFixed(2),
-    avgValue: +(totalValue / scores.length).toFixed(2)
+    avgEffort: +(totalEffort / scores.filter((s) => s.effort > 0).length).toFixed(2),
+    avgValue: +(totalValue / scores.filter((s) => s.value > 0).length).toFixed(2)
   };
 }
 
