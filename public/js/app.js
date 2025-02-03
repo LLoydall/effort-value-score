@@ -145,8 +145,8 @@ function createIdeaRow(idea) {
       return;
     }
 
-    const effVal = parseInt(effortInput.value.trim(), 10);
-    const valVal = parseInt(valueInput.value.trim(), 10);
+    const effVal = parseInt(effortInput.value.trim(), 10) ?? 0;
+    const valVal = parseInt(valueInput.value.trim(), 10) ?? 0;
 
     if (isNaN(effVal) || isNaN(valVal)) {
       alert('Effort and Value must be valid numbers.');
